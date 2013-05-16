@@ -28,14 +28,15 @@ class Pdo extends \PDO
 
 	public function getQueryLog()
 	{
-		return $this->queryLog();
+		return $this->queryLog;
 	}
 
 	public function prepare($statement, $driver_options = array())
 	{
-		$this->queryCount++;
+		$driver_options[\PDO::ATTR_STATEMENT_CLASS] = array('\CentralApps\Pdo\PdoStatement');
 		$statement = parent::prepare($statement, $driver_options);
-		return new PdoStatement($statement);
+		$statement->linkPdo($this);
+		return $statement;
 	}
 
 	public function query($query)
