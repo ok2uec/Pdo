@@ -26,3 +26,14 @@ Install via composer
 Use in place of the PDO class
 
 	$pdo = new \CentralApps\Pdo\Pdo(....
+
+Get query count
+
+	echo 'There were ' . $pdo->getQueryCount() . ' queries executed on this page load';
+
+Get the query log
+
+	echo '<h2>Query log</h2>';
+	foreach ($pdo->getQueryLog() as $log) {
+		echo '<p>' . $log . '</p>';
+	}
