@@ -13,7 +13,12 @@ class PdoStatement extends \PDOStatement
 
 	public function bindParam($parameter, &$variable, $data_type=\PDO::PARAM_STR, $length = 0, $driver_options=array())
 	{
-		$this->params[$parameter] = $variable;
+		if (\PDO::PARAM_STR == $data_type) {
+			$this->params[$parameter] = "'" . $variable . "'";
+		} else {
+			$this->params[$parameter] = $variable;
+		}
+
 		parent::bindParam($parameter, $variable, $data_type, $length, $driver_options);
 	}
 
