@@ -51,7 +51,7 @@ class Pdo extends \PDO
     public function exec($statement)
     {
         $this->queryCount++;
-        $this->queryLog[] = $query;
+        $this->queryLog[] = $statement;
 
         return parent::exec($statement);
     }
